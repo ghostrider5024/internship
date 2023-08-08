@@ -9,7 +9,7 @@ namespace MusicPlayer.Services
         public Task<ICollection<SongArtist>> GetAllSongArtistsAsync();
         public Task<SongArtist> CreateSongArtistAsync(SongArtist model);
         public Task<SongArtist> UpdateSongArtistAsync(SongArtist model);
-        public Task<SongArtist> DeleteSongArtistAsync(string id);
+        public Task<SongArtist> DeleteSongArtistAsync(string songId, string artistId);
     }
     public class SongArtistService : ISongArtistService
     {
@@ -48,12 +48,12 @@ namespace MusicPlayer.Services
             return null;
         }
 
-        public async Task<SongArtist> DeleteSongArtistAsync(string id)
+        public async Task<SongArtist> DeleteSongArtistAsync(string songId, string artistId)
         {
-            var result = await GetSongArtistById(id);
+            var result = await GetSongArtistById(songId, artistId);
             if (result != null)
             {
-                result.DeletedDate = DateTime.Now;
+                result.DeleteDate = DateTime.Now;
                 return await UpdateSongArtistAsync(result);
             }
             else
@@ -62,9 +62,9 @@ namespace MusicPlayer.Services
             }
         }
 
-        public async Task<SongArtist> GetSongArtistById(string Id)
+        public async Task<SongArtist> GetSongArtistById(string songId, string artistId)
         {
-            return await _songArtistRepository.GetById(Id);
+            return await _songArtistRepository.GetById(songId, artistId);
         }
     }
 }

@@ -8,12 +8,12 @@ namespace MusicPlayer.Repositories
         public async Task<IQueryable<Artist>> GetArtistsWithInclude()
         {
             return _context.Set<Artist>()
-                .Where(t => t.DeletedDate == null);
+                .Where(t => t.DeleteDate == null);
         }
 
         public async Task<Artist> CreateArtistAsync(Artist model)
         {
-            model.DeletedDate = null;
+            model.DeleteDate = null;
             return await Add(model);
         }
 

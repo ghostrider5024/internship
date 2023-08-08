@@ -22,7 +22,7 @@ namespace MusicPlayer.Repositories
             }
         }
 
-        public async Task<T?> GetById(object Id)
+        public async Task<T?> GetById(params object[] Id)
         {
             try
             {

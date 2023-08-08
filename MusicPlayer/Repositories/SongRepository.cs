@@ -10,12 +10,12 @@ namespace MusicPlayer.Repositories
             return _context.Set<Song>()
                 .Include(p => p.SongArtists)
                 .Include(p => p.SongPlaylists).ThenInclude(c => c.Playlist)
-                .Where(t => t.DeletedDate == null);
+                .Where(t => t.DeleteDate == null);
         }
 
         public async Task<Song> CreateSongAsync(Song model)
         {
-            model.DeletedDate = null;
+            model.DeleteDate = null;
             return await Add(model);
         }
 

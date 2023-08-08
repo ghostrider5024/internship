@@ -53,7 +53,7 @@ namespace MusicPlayer.Services
             var result = await GetArtistById(id);
             if (result != null)
             {
-                result.DeletedDate = DateTime.Now;
+                result.DeleteDate = DateTime.Now;
                 return await UpdateArtistAsync(result);
             }
             else

@@ -34,19 +34,20 @@ namespace MusicPlayer.Controllers
             return Ok(new ReturnResponse<SongArtistResponse>(_mapper.Map<SongArtistResponse>(result)));
         }
 
-        [HttpPut("edit/{keyId}")]
-        public async Task<IActionResult> UpdateSongArtist(string keyId, SongArtistResponse SongArtist)
+        [HttpPut("edit/{songId}&{artistId}")]
+        public async Task<IActionResult> UpdateSongArtist(string songId, string artistId, SongArtistResponse SongArtist)
         {
             var temp = _mapper.Map<SongArtist>(SongArtist);
-            temp.Id = keyId;
+            temp.SongId = songId;
+            temp.ArtistId = artistId;
             var result = await _songArtistService.UpdateSongArtistAsync(temp);
             return Ok(new ReturnResponse<SongArtistResponse>(_mapper.Map<SongArtistResponse>(result)));
         }
 
-        [HttpDelete("delete/{keyId}")]
-        public async Task<IActionResult> DeleteSongArtist(string keyId)
+        [HttpDelete("delete/{songId}&{artistId}")]
+        public async Task<IActionResult> DeleteSongArtist(string songId, string artistId)
         {
-            var result = await _songArtistService.DeleteSongArtistAsync(keyId);
+            var result = await _songArtistService.DeleteSongArtistAsync(songId, artistId);
             var returnRes = new ReturnResponse<SongArtistResponse>(_mapper.Map<SongArtistResponse>(result)
                 , messageSuccess: "Delete success", messageFail: "Delete failed");
 

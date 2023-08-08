@@ -19,7 +19,7 @@ namespace MusicPlayer.Migrations
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DebutDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    DeletedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -35,7 +35,7 @@ namespace MusicPlayer.Migrations
                     Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReleasedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    DeletedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -54,7 +54,7 @@ namespace MusicPlayer.Migrations
                     Language = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Duration = table.Column<int>(type: "int", nullable: false),
-                    DeletedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,8 +68,7 @@ namespace MusicPlayer.Migrations
                     SongId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ArtistId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeletedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -95,8 +94,7 @@ namespace MusicPlayer.Migrations
                     SongId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PlaylistId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeletedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
                 constraints: table =>
                 {
