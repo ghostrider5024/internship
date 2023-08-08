@@ -1,0 +1,5 @@
+pushd Repository\WaterCity.Repository
+dotnet ef migrations add DB-Init -v --context AppDbContext
+dotnet ef database update -v --context AppDbContext
+pause
+popd
