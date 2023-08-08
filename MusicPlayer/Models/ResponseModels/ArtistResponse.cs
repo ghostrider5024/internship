@@ -9,6 +9,6 @@
         public string Description { get; set; }
         public DateTimeOffset DebutDate { get; set; }
 
-        public List<SongResponse> Songs { get; set; }
+        //public List<SongResponse> Songs { get; set; }
     }
 }

@@ -9,6 +9,8 @@ namespace MusicPlayer.AutoMapper
         public AutoMapper()
         {
             MapSong();
+            MapArtist();
+            MapSongArtist();
         }
 
         private void MapSong()
@@ -18,6 +20,16 @@ namespace MusicPlayer.AutoMapper
              //.ForMember(dest => dest.Playlists, opt => opt.MapFrom(src => src.SongPlaylists.Select(sc => sc.PlaylistId)))
              .ReverseMap();
 
+        }
+
+        private void MapArtist()
+        {
+            CreateMap<Artist, ArtistResponse>().ReverseMap();
+        }
+
+        private void MapSongArtist()
+        {
+            CreateMap<SongArtist, SongArtistResponse>().ReverseMap();
         }
     }
 }

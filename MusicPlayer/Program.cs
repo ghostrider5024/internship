@@ -57,7 +57,20 @@ void SeedData(IHost app)
 
 void AddDI(IServiceCollection services)
 {
+    #region Song
     services.AddScoped<SongRepository>();
     services.AddScoped<ISongService, SongService>();
+    #endregion
+
+    #region Artist
+    services.AddScoped<ArtistRepository>();
+    services.AddScoped<IArtistService, ArtistService>();
+    #endregion
+
+    #region SongArtist
+    services.AddScoped<SongArtistRepository>();
+    services.AddScoped<ISongArtistService, SongArtistService>();
+    #endregion
+
     services.AddAutoMapper(typeof(Program).Assembly);
 }
