@@ -4,7 +4,7 @@
     {
         public string message { get; set; }
         public bool error { get; set; }
-        public T data { get; set; }
+        public T? data { get; set; }
 
         public ReturnResponse(T data, string messageSuccess = "Sucess", string messageFail = "Fail")
         {
