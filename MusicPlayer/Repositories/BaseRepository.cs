@@ -22,16 +22,16 @@ namespace MusicPlayer.Repositories
             }
         }
 
-        public async Task<T?> GetByIntId(int id)
+        public async Task<T?> GetById(object Id)
         {
             try
             {
-                var entity = await _context.Set<T>().FindAsync(id);
+                var entity = await _context.Set<T>().FindAsync(Id);
                 return entity;
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception($"Error getting entity: {ex.Message}", ex);
+                return null;
             }
         }
         public async Task<T> Add(T entity)
@@ -48,12 +48,13 @@ namespace MusicPlayer.Repositories
             }
         }
 
-        public async Task Update(T entity)
+        public async Task<T> Update(T entity)
         {
             try
             {
                 _context.Set<T>().Update(entity);
                 await _context.SaveChangesAsync();
+                return entity;
             }
             catch (Exception ex)
             {

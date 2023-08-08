@@ -12,7 +12,7 @@ using MusicPlayer.Data;
 namespace MusicPlayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230807141434_DbInit")]
+    [Migration("20230808034258_DbInit")]
     partial class DbInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,7 +32,7 @@ namespace MusicPlayer.Migrations
                     b.Property<DateTimeOffset>("DebutDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTimeOffset>("DeletedDate")
+                    b.Property<DateTimeOffset?>("DeletedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
@@ -47,9 +47,13 @@ namespace MusicPlayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Thumbnail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Artists");
+                    b.ToTable("Artist");
                 });
 
             modelBuilder.Entity("MusicPlayer.Models.Playlist", b =>
@@ -57,7 +61,7 @@ namespace MusicPlayer.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTimeOffset>("DeletedDate")
+                    b.Property<DateTimeOffset?>("DeletedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
@@ -67,13 +71,17 @@ namespace MusicPlayer.Migrations
                     b.Property<DateTimeOffset>("ReleasedDate")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("Thumbnail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Playlists");
+                    b.ToTable("Playlist");
                 });
 
             modelBuilder.Entity("MusicPlayer.Models.Song", b =>
@@ -81,7 +89,11 @@ namespace MusicPlayer.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTimeOffset>("DeletedDate")
+                    b.Property<string>("Audio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("DeletedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
@@ -98,13 +110,17 @@ namespace MusicPlayer.Migrations
                     b.Property<DateTimeOffset>("ReleasedDate")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("Thumbnail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Songs");
+                    b.ToTable("Song");
                 });
 
             modelBuilder.Entity("MusicPlayer.Models.SongArtist", b =>
@@ -115,7 +131,7 @@ namespace MusicPlayer.Migrations
                     b.Property<string>("ArtistId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTimeOffset>("DeletedDate")
+                    b.Property<DateTimeOffset?>("DeletedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Id")
@@ -129,7 +145,7 @@ namespace MusicPlayer.Migrations
 
                     b.HasIndex("ArtistId");
 
-                    b.ToTable("SongArtists");
+                    b.ToTable("SongArtist");
                 });
 
             modelBuilder.Entity("MusicPlayer.Models.SongPlaylist", b =>
@@ -140,7 +156,7 @@ namespace MusicPlayer.Migrations
                     b.Property<string>("PlaylistId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTimeOffset>("DeletedDate")
+                    b.Property<DateTimeOffset?>("DeletedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Id")
@@ -154,7 +170,7 @@ namespace MusicPlayer.Migrations
 
                     b.HasIndex("PlaylistId");
 
-                    b.ToTable("SongPlaylists");
+                    b.ToTable("SongPlaylist");
                 });
 
             modelBuilder.Entity("MusicPlayer.Models.SongArtist", b =>

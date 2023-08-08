@@ -30,7 +30,7 @@ namespace MusicPlayer.Migrations
                     b.Property<DateTimeOffset>("DebutDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTimeOffset>("DeletedDate")
+                    b.Property<DateTimeOffset?>("DeletedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
@@ -59,7 +59,7 @@ namespace MusicPlayer.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTimeOffset>("DeletedDate")
+                    b.Property<DateTimeOffset?>("DeletedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
@@ -91,7 +91,7 @@ namespace MusicPlayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTimeOffset>("DeletedDate")
+                    b.Property<DateTimeOffset?>("DeletedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
@@ -129,7 +129,7 @@ namespace MusicPlayer.Migrations
                     b.Property<string>("ArtistId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTimeOffset>("DeletedDate")
+                    b.Property<DateTimeOffset?>("DeletedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Id")
@@ -154,7 +154,7 @@ namespace MusicPlayer.Migrations
                     b.Property<string>("PlaylistId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTimeOffset>("DeletedDate")
+                    b.Property<DateTimeOffset?>("DeletedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Id")
