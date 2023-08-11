@@ -72,5 +72,10 @@ void AddDI(IServiceCollection services)
     services.AddScoped<ISongArtistService, SongArtistService>();
     #endregion
 
+    #region Playlist
+    services.AddScoped<PlaylistRepository>();
+    services.AddScoped<IPlaylistService, PlaylistService>();
+    #endregion
+
     services.AddAutoMapper(typeof(Program).Assembly);
 }

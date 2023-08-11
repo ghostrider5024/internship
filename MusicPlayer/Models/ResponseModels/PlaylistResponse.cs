@@ -7,6 +7,5 @@
         public string Thumbnail { get; set; }
         public string Description { get; set; }
         public DateTimeOffset ReleasedDate { get; set; }
-        public List<SongResponse> Songs { get; set; }
     }
 }
