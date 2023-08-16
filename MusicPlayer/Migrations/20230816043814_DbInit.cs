@@ -62,6 +62,25 @@ namespace MusicPlayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BirthDay = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SongArtist",
                 columns: table => new
                 {
@@ -122,6 +141,12 @@ namespace MusicPlayer.Migrations
                 name: "IX_SongPlaylist_PlaylistId",
                 table: "SongPlaylist",
                 column: "PlaylistId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_Username",
+                table: "User",
+                column: "Username",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -131,6 +156,9 @@ namespace MusicPlayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "SongPlaylist");
+
+            migrationBuilder.DropTable(
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Artist");

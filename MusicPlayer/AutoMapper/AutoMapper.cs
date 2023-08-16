@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MusicPlayer.Models;
+using MusicPlayer.Models.RequestModels;
 using MusicPlayer.Models.ResponseModels;
 
 namespace MusicPlayer.AutoMapper
@@ -13,6 +14,7 @@ namespace MusicPlayer.AutoMapper
             MapSongArtist();
             MapPlaylist();
             MapSongPlaylist();
+            MapUser();
         }
 
         private void MapSong()
@@ -43,5 +45,12 @@ namespace MusicPlayer.AutoMapper
         {
             CreateMap<SongPlaylist, SongPlaylistResponse>().ReverseMap();
         }
+        private void MapUser()
+        {
+            CreateMap<User, UserResponse>().ReverseMap();
+            CreateMap<User, LoginRequest>().ReverseMap();
+            CreateMap<User, UserRequest>().ReverseMap();
+        }
+
     }
 }

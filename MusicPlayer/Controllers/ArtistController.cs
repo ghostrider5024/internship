@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MusicPlayer.Models.ResponseModels;
 using MusicPlayer.Models;
 using MusicPlayer.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MusicPlayer.Controllers
 {

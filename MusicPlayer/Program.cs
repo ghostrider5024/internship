@@ -5,6 +5,11 @@ using Newtonsoft.Json;
 using MusicPlayer.Controllers;
 using MusicPlayer.Repositories;
 using MusicPlayer.Services;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +27,52 @@ AddDI(builder.Services);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(opt =>
+{
+    opt.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        Description = "bearer token",
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+    opt.OperationFilter<SecurityRequirementsOperationFilter>();
+});
+//builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+
 builder.Services.AddDbContext<DataContext>();
+
+#region Authentication and Authorization
+builder.Services.AddAuthentication(op =>
+{
+    op.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    op.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    op.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+
+}).AddJwtBearer(op =>
+{
+    op.SaveToken = true;
+    op.RequireHttpsMetadata = false;
+    op.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["Jwt:ValidAudience"],
+        ValidIssuer = builder.Configuration["Jwt:ValidIssuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecureKey"]))
+    };
+});
+
+
+// Authorization
+//builder.Services.AddAuthorization(op =>
+//{
+//    op.AddPolicy("DepartmentPolicy", policy => policy.RequireClaim("department"));
+//});
+builder.Services.AddAuthorization();
+
+
+#endregion Authentication and Authorization
 
 var app = builder.Build();
 
@@ -35,6 +84,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
@@ -75,6 +126,11 @@ void AddDI(IServiceCollection services)
     #region Playlist
     services.AddScoped<PlaylistRepository>();
     services.AddScoped<IPlaylistService, PlaylistService>();
+    #endregion
+
+    #region User
+    services.AddScoped<UserRepository>();
+    services.AddScoped<IUserService, UserService>();
     #endregion
 
     services.AddAutoMapper(typeof(Program).Assembly);

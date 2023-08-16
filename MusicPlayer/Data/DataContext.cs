@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MusicPlayer.Models;
 using System.Diagnostics.Metrics;
+using System.Reflection.Emit;
+using System.Xml;
 
 namespace MusicPlayer.Data
 {
@@ -37,9 +39,16 @@ namespace MusicPlayer.Data
         public DbSet<Playlist> Playlist { get; set; }
         public DbSet<SongArtist> SongArtist { get; set; }
         public DbSet<SongPlaylist> SongPlaylist { get; set; }
+        public DbSet<User> User { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            AddPrimaryAndForeignKey(modelBuilder);
+            OptionalColumn(modelBuilder);
+        }
+
+        protected void AddPrimaryAndForeignKey(ModelBuilder modelBuilder)
         {
             //Many to Many relation between Song and Artist
             modelBuilder.Entity<SongArtist>()
@@ -65,8 +74,15 @@ namespace MusicPlayer.Data
                     .WithMany(t => t.SongPlaylists)
                     .HasForeignKey(f => f.PlaylistId);
 
-
-
+            
         }
+
+        protected void OptionalColumn(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                   .HasIndex(e => e.Username)
+                   .IsUnique();
+        }
+
     }
 }

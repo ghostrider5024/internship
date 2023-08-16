@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MusicPlayer.Models;
 using MusicPlayer.Models.ResponseModels;
 using MusicPlayer.Services;
+using System.Data;
 
 namespace MusicPlayer.Controllers
 {
@@ -27,6 +29,7 @@ namespace MusicPlayer.Controllers
         }
 
         [HttpPost("song")]
+        [Authorize(Roles = nameof(Role.Admin))]
         public async Task<IActionResult> CreateSong(SongResponse song)
         {
             var result = await _songService.CreateSongAsync(_mapper.Map<Song>(song));
@@ -34,6 +37,7 @@ namespace MusicPlayer.Controllers
         }
 
         [HttpPut("edit/{keyId}")]
+        [Authorize(Roles = nameof(Role.Admin))]
         public async Task<IActionResult> UpdateSong(string keyId, SongResponse song)
         {
             var temp = _mapper.Map<Song>(song);
@@ -43,6 +47,7 @@ namespace MusicPlayer.Controllers
         }
 
         [HttpDelete("delete/{keyId}")]
+        [Authorize(Roles = nameof(Role.Admin))]
         public async Task<IActionResult> DeleteSong(string keyId)
         {
             var result = await _songService.DeleteSongAsync(keyId);
