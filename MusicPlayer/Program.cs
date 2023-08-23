@@ -133,5 +133,9 @@ void AddDI(IServiceCollection services)
     services.AddScoped<IUserService, UserService>();
     #endregion
 
+    #region Authent
+    services.AddScoped<IAuthentService, AuthentService>();
+    #endregion
+
     services.AddAutoMapper(typeof(Program).Assembly);
 }

@@ -5,6 +5,7 @@ using MusicPlayer.Models;
 using MusicPlayer.Models.RequestModels;
 using MusicPlayer.Models.ResponseModels;
 using MusicPlayer.Services;
+using System.Security.Claims;
 
 namespace MusicPlayer.Controllers
 {
@@ -21,20 +22,30 @@ namespace MusicPlayer.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("Users")]
+        [HttpGet("get-all")]
         public async Task<IActionResult> GetUsers()
         {
             var result = await _userService.GetAllUsersAsync();
             return Ok(new ReturnResponse<List<UserResponse>>(_mapper.Map<List<UserResponse>>(result)));
         }
 
-        [HttpPost("User")]
+        //[HttpGet("get-infor")]
+        //[Authorize]
+        //public async Task<IActionResult> GetInformation()
+        //{
+        //    var identity = User.Identity as ClaimsIdentity;
+        //    var result = await _userService.GetInformation(identity);
+        //    return Ok(new ReturnResponse<List<UserResponse>>(_mapper.Map<List<UserResponse>>(result)));
+        //}
+
+
+        [HttpPost("create")]
         public async Task<IActionResult> CreateUser(Role role, UserRequest request)
         {
             if (role == null)
                 return BadRequest("Choose Role");
             var user = _mapper.Map<User>(request);
-            user.Role = role;
+            user.Role = Role.User;
             var result = await _userService.CreateUserAsync(user);
             return Ok(new ReturnResponse<UserResponse>(_mapper.Map<UserResponse>(result)));
         }
@@ -59,11 +70,11 @@ namespace MusicPlayer.Controllers
             return Ok(returnRes);
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> LoginAsync(LoginRequest model)
-        {
-            var token = await _userService.LoginAsync(_mapper.Map<User>(model));
-            return token == null ? Unauthorized("Login failed") : Ok(token);
-        }
+        //[HttpPost("login")]
+        //public async Task<IActionResult> LoginAsync(LoginRequest model)
+        //{
+        //    var token = await _userService.LoginAsync(_mapper.Map<User>(model));
+        //    return token == null ? Unauthorized("Login failed") : Ok(token);
+        //}
     }
 }

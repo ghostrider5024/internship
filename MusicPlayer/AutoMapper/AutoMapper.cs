@@ -49,6 +49,7 @@ namespace MusicPlayer.AutoMapper
         {
             CreateMap<User, UserResponse>().ReverseMap();
             CreateMap<User, LoginRequest>().ReverseMap();
+            CreateMap<User, RegisterRequest>().ReverseMap();
             CreateMap<User, UserRequest>().ReverseMap();
         }
 
