@@ -1,0 +1,109 @@
+﻿@model IEnumerable<DemoMVC.Models.Sach>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    td{
+        vertical-align:middle
+    }
+    
+    a{
+        color: black;
+        text-decoration: none;
+    }
+
+    a:hover{
+        color: black;
+        text-decoration: none;
+    }
+
+    .btn-action{
+        padding:5px;
+        border-radius: 3px;
+        color:white;
+    }
+
+    .btn-action:hover{
+        background-color:darkgray;
+        color: white;
+    }
+
+    .btn-detail{
+        background-color:cornflowerblue;
+    }
+
+    .btn-edit{
+        background-color: green;
+    }
+
+    .btn-delete{
+        background-color: red;
+    }
+
+
+
+</style>
+
+<h1>Danh sách sách</h1>
+
+<br/>
+<br/>
+
+
+<p>
+    <a asp-action="Create" class="btn-action btn-edit">Tạo mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th> Ảnh bìa </th>
+            <th> Tên sách </th>
+            <th> Số trang </th>
+            <th> Ngôn ngữ </th>
+            <th> Tác giả </th>
+            <th> NXB </th>
+            <th> Năm xuất bản </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td >
+                <div>
+                    <img src="@item.Anhbia"
+                         width="120"
+                             height="120" />
+                </div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tensach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sotrang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ngonngu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tacgia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nxb)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Namxb)
+            </td>
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Masach" class="btn-action btn-edit">Sửa</a> |
+                <a asp-action="Details" asp-route-id="@item.Masach" class="btn-action btn-detail">Chi tiết</a> |
+                <a asp-action="Delete" asp-route-id="@item.Masach" class="btn-action btn-delete">Xóa</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

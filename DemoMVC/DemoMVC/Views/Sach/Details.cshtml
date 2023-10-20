@@ -1,0 +1,114 @@
+﻿@model DemoMVC.Models.Sach
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: black;
+        text-decoration: none;
+    }
+
+    td {
+        vertical-align: middle
+    }
+
+    .btn-action {
+        padding: 5px;
+        border-radius: 3px;
+        color: white;
+    }
+
+    .btn-action:hover {
+        background-color: darkgray;
+        color: white;
+    }
+
+    .btn-detail {
+        background-color: cornflowerblue;
+    }
+
+    .btn-edit {
+        background-color: green;
+    }
+
+    .btn-delete {
+        background-color: red;
+    }
+
+    fieldset > input {
+        border: none;
+        outline: none;
+        width: 100%;
+    }
+
+</style>
+
+
+<div class="container">
+    <h4>Thông tin chi tiết sách</h4>
+    <hr />
+    <div class="row">
+        <div class="col-xl-3 col-md-3">
+            <img src="@Model.Anhbia" width="100%" height="100%"/>
+        </div>
+        <dl class="row col-xl-9 col-md-9">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Tensach)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Tensach)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Sotrang)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Sotrang)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Ngonngu)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Ngonngu)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Tacgia)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Tacgia)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Nxb)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Nxb)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Namxb)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Namxb)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Mota)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Mota)
+            </dd>
+        </dl>
+    </div>
+
+    <br />
+
+    <div>
+        <a asp-action="Edit" class="btn-action btn-edit" asp-route-id="@Model?.Masach">Sửa</a> |
+        <a asp-action="Index" class="btn-action btn-detail">Trở về danh sách</a>
+    </div>
+</div>
+
